@@ -5,5 +5,7 @@
 
     <bean id="userDao" class="com.weidd.best.dao.UserDao"></bean>
 
-    <bean id="userService" class="com.weidd.best.service.UserService"></bean>
+    <bean id="userService" class="com.weidd.best.service.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
 </beans>

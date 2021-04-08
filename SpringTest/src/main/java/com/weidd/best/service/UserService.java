@@ -9,7 +9,11 @@ import com.weidd.best.dao.UserDao;
  **/
 public class UserService {
 
-    //给需要注入的对象提供set方法,同时
+    /**
+     * 控制反转依赖注入的操作步骤:
+     * 需要哪个组件,将哪个组件声明为成员变量,
+     * 注入时提供Set方法.
+     */
     private UserDao userDao;
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
