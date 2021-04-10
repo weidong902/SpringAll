@@ -11,11 +11,16 @@
 
     <!--配置通知类-->
     <bean id="orderAdvice" class="aop.advice_pointcut.OrderAdvice"></bean>
-    
+
     <!--
     配置切入点(<aop:config回车引入aop的标签)
     -->
-    <aop:config>
+    <!--
+    proxy-target-class="false"
+    两种动态代理的切换:
+    默认为false,jdk proxy 基于接口的动态代理
+    -->
+    <aop:config proxy-target-class="false">
         <!--
         id:切入点在工厂中的的唯一id
         expression:表达式 execution(*[方法的返回值为任意值] 包名.类名.*[*代表所有的方法](..不关心参数)))

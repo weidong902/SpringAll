@@ -4,10 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--被代理对象 taget-->
-    <bean id="productService" class="aop.service.ProductServiceImpl"></bean>
+    <bean id="productService" class="aop.staticproxy.service.ProductServiceImpl"></bean>
 
     <!--代理对象-->
-    <bean  id="productServiceProxy" class="aop.service.ProductServiceStaticProxyImpl">
+    <bean  id="productServiceProxy" class="aop.staticproxy.service.ProductServiceStaticProxyImpl">
         <property name="productService" ref="productService"></property>
     </bean>
 </beans>

@@ -10,12 +10,19 @@
     <name>quickstart</name>
     <description></description>
 
+
     <parent>
         <groupId>com.weidd.best</groupId>
         <artifactId>SpringAll</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>
