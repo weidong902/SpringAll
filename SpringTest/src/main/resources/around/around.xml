@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--配置组件交由spring管理-->
+    <bean id="employeeService" class="aop.advice_around.EmployeeServiceImpl"></bean>
+    <!--通知-->
+    <bean id="aroundAdvice" class="aop.advice_around.AroundAdvice"></bean>
+
+    <!--配置切面-->
+    <aop:config>
+        <!--定义切入点-->
+        <aop:pointcut id="aroundPointcut" expression="execution(* aop.advice_around.EmployeeServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="aroundAdvice" pointcut-ref="aroundPointcut"></aop:advisor>
+    </aop:config>
+
+</beans>

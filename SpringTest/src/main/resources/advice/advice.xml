@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--管理业务组件-->
+    <bean id="orderService" class="aop.advice_pointcut.OrderServiceImpl"></bean>
+
+    <!--配置通知类-->
+    <bean id="orderAdvice" class="aop.advice_pointcut.OrderAdvice"></bean>
+    
+    <!--
+    配置切入点(<aop:config回车引入aop的标签)
+    -->
+    <aop:config>
+        <!--
+        id:切入点在工厂中的的唯一id
+        expression:表达式 execution(*[方法的返回值为任意值] 包名.类名.*[*代表所有的方法](..不关心参数)))
+        -->
+        <aop:pointcut id="orderPointcut" expression="execution(* aop.advice_pointcut.OrderServiceImpl.*(..))"/>
+        <!--组装切面-->
+        <aop:advisor advice-ref="orderAdvice" pointcut-ref="orderPointcut"></aop:advisor>
+    </aop:config>
+</beans>

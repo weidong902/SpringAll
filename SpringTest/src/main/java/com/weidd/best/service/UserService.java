@@ -2,12 +2,29 @@ package com.weidd.best.service;
 
 import com.weidd.best.dao.UserDao;
 
+import java.util.List;
+
 /**
  * @program: SpringAll
  * @author: weidd
  * @date: 2021-04-08 19:57
  **/
 public class UserService {
+    private String username;
+    private Integer age;
+    private List<String> list;
+
+    public void setList(List<String> list) {
+        this.list = list;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     /**
      * 控制反转依赖注入的操作步骤:
@@ -21,5 +38,11 @@ public class UserService {
 
     public void save(String id) {
         userDao.save(id);
+        System.out.println("username: "+ this.username);
+        System.out.println("username: "+ this.age);
+        System.out.println("---------------------遍历list----------------");
+        for (String str : list) {
+            System.out.println(str);
+        }
     }
 }

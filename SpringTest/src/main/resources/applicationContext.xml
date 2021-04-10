@@ -7,5 +7,16 @@
 
     <bean id="userService" class="com.weidd.best.service.UserService">
         <property name="userDao" ref="userDao"></property>
+        <property name="username" value="张三"></property>
+        <property name="age" value="23"></property>
+        <!--注入List-->
+        <property name="list">
+            <list>
+                <value>2323</value>
+                <value>233424</value>
+                <value>2423423234</value>
+            </list>
+        </property>
+        <!--注入数组-->
     </bean>
 </beans>
