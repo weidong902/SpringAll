@@ -31,7 +31,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://localhost:3306/mysqlStudy"></property>
         <property name="username" value="root"></property>
-        <property name="password" value="3.014/*-+"></property>
+        <property name="password" value="root"></property>
     </bean>
     <!--创建Dao-->
     <bean id="productDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
