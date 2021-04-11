@@ -5,6 +5,8 @@
     <insert id="saveProduct" parameterType="com.weidd.best.pojo.Product">
         insert into product values (#{pname},#{price})
     </insert>
-
+    <select id="find" parameterType="int" resultType="com.weidd.best.pojo.Product">
+        select * from product
+    </select>
 
 </mapper>

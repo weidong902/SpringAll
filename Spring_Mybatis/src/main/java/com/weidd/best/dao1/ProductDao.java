@@ -2,6 +2,8 @@ package com.weidd.best.dao1;
 
 import com.weidd.best.pojo.Product;
 
+import java.util.List;
+
 /**
  * @program: SpringAll
  * @author: weidd
@@ -9,4 +11,6 @@ import com.weidd.best.pojo.Product;
  **/
 public interface ProductDao {
     void saveProduct(Product product);
+
+    List<Product> find();
 }

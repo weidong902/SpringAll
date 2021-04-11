@@ -34,7 +34,7 @@
     </bean>
 
     <bean id="productService" class="com.weidd.best.service1.ProductServiceImpl">
-        <!--<property name="productDao" ref="productDao"/>-->
+        <property name="productDao" ref="productDao"/>
     </bean>
 
 </beans>

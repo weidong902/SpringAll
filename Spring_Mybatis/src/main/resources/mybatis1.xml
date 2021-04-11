@@ -15,10 +15,17 @@
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--依赖于DataSource-->
         <property name="dataSource" ref="dataSource"></property>
-        <!--mapper 资源文件注册-->
+        <!--mapper 资源文件注册,一次注册一个文件 待优化:mybatis2.xml-->
         <property name="mapperLocations">
             <array>
                 <value>classpath:com/weidd/best/dao/UserDaoMapper.xml</value>
+            </array>
+        </property>
+        <!--起别名,在mapper中返回值类型或者参数类型可以用类名或类名首字母小写. 待优化:mybatis2.xml-->
+        <property name="typeAliases" >
+            <array>
+                <value>com.weidd.best.pojo.User</value>
+                <value>com.weidd.best.pojo.Product</value>
             </array>
         </property>
     </bean>
