@@ -2,10 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop
-       https://www.springframework.org/schema/aop/spring-aop.xsd">
+       https://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--1\创建SQLSessionFactory  需要两个属性:DataSource\ mapperLocations-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -33,8 +39,48 @@
         <property name="basePackage" value="com.weidd.best.dao1"/>
     </bean>
 
+    <!--创建事务管理器:作用:保证service dao使用同一个连接对象-->
+    <!--transactionManager 可以看做是一个线程安全的连接对象-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--
+    自己实现如下:
+    类 implements  MethodInpertector
+    transactionManager
+    public Onject invoke(){
+    transactionManager.getConnection.set...
+    放行.
+    transactionManager.getConnection.commit...
+    or
+    transactionManager.getConnection.rollback...
+    }
+    -->
+
+    <!--
+    tx:advice : 用来创建一个环绕通知
+    id:创建环绕通知在工厂中的唯一标识
+    transaction-Manager: 指定当前使用的事务管理
+    -->
+    <tx:advice id="interceptor" transaction-manager="transactionManager">
+        <!--事务的细粒度控制-->
+        <tx:attributes>
+            <tx:method name="save*"/>
+            <tx:method name="*update*"/>
+            <tx:method name="delete*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--组装切面-->
+    <aop:config>
+        <aop:pointcut id="pc" expression="within(com.weidd.best.service1.*Impl)"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="pc"/>
+    </aop:config>
+
+
     <bean id="productService" class="com.weidd.best.service1.ProductServiceImpl">
-        <!--<property name="productDao" ref="productDao"/>-->
+        <property name="productDao" ref="productDao"/>
     </bean>
 
 </beans>
