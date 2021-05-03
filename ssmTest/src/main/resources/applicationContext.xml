@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--1.开启注解扫描 只处理service和dao,不处理Controller-->
+    <context:component-scan base-package="com.weidd.best">
+        <!--配置排除-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--2.引入资源文件:数据库相关 文件上传..-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--3.数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.dirver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- 管理mybatis操作数据库的会话对象SqlSession -->
+    <!--注入SQLSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!--设置映射文件路径-->
+        <property name="mapperLocations" value="classpath:com/weidd/best/mapper/*Mapper.xml"/>
+        <!--扫描POJO使用别名-->
+        <property name="typeAliasesPackage" value="com.weidd.best.pojo"/>
+    </bean>
+
+    <!--注入dao-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.weidd.best.mapper"/>
+    </bean>
+
+    <!-- 开启事务注解驱动 -->
+    <!--    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--创建Spring声明式事务管理-->
+    <!--创建事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--根据事务管理器生成一个事务的环绕通知-->
+    <tx:advice id="interceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delect*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--组装切面-->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.weidd.best.service.*Impl.*(..))"/>
+        <!--<aop:pointcut id="pc" expression="within(com.weidd.best.service)"/>-->
+        <aop:advisor advice-ref="interceptor" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+
+</beans>

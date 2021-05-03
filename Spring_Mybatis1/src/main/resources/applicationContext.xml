@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--注入数据源对象 Druid-->
     <!--注入SqlSessionFactory-->
@@ -22,13 +28,13 @@
     <!--注入SqlSessionFactory-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com/weidd/best/dao/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath:com/weidd/best/mapper/*Mapper.xml"/>
         <property name="typeAliasesPackage" value="com.weidd.best.pojo"/>
     </bean>
     <!--注入dao-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
-        <property name="basePackage" value="com.weidd.best.dao"/>
+        <property name="basePackage" value="com.weidd.best.mapper"/>
     </bean>
     <!--创建事务管理器 TransactionManager-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -37,9 +43,12 @@
 
     <!--根据事务管理器生成一个事务的环绕通知-->
     <tx:advice id="interceptor" transaction-manager="transactionManager">
-        <!--事务细粒度控制-->
+        <!--事务细粒度控制
+        事务相关属性:
+        propagation(传播):
+        -->
         <tx:attributes>
-            <tx:method name="save*"/>
+            <tx:method name="save*" />
             <tx:method name="update*"/>
         </tx:attributes>
     </tx:advice>

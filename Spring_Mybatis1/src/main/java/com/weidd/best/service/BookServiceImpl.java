@@ -1,6 +1,6 @@
 package com.weidd.best.service;
 
-import com.weidd.best.dao.BookDao;
+import com.weidd.best.mapper.BookDao;
 import com.weidd.best.pojo.Book;
 
 import java.util.List;

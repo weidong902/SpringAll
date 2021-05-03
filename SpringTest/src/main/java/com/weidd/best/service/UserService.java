@@ -1,6 +1,6 @@
 package com.weidd.best.service;
 
-import com.weidd.best.dao.UserDao;
+import com.weidd.best.mapper.UserDao;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public void save(String id) {
-        userDao.save(id);
+        userDao.save1(id);
         System.out.println("username: "+ this.username);
         System.out.println("username: "+ this.age);
         System.out.println("---------------------遍历list----------------");

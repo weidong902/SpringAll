@@ -1,6 +1,5 @@
 package com.weidd.best.service;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.weidd.best.dao.UserDao;
 import com.weidd.best.pojo.User;
 import org.springframework.context.ApplicationContext;
