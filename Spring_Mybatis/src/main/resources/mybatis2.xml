@@ -19,7 +19,7 @@
         <!--mapper文件注册优化:mapper文件注册,一次性注入多个mapper文件-->
         <property name="mapperLocations" value="classpath:com/weidd/best/dao1/*.xml"></property>
         <!--别名优化-->
-        <property name="typeAliasesPackage" value="com.weidd.best.pojo"></property>
+        <property name="typeAliasesPackage" value="java.study.best.pojo"></property>
     </bean>
     <!--2\创建DataSource-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -36,7 +36,7 @@
     <!--一次性注入整个包下的类 使用MapperScannerConfigurer批量注入Dao,默认在容器中的名为:UserDao > userDao首字母小写-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.weidd.best.dao1"/>
+        <property name="basePackage" value="java.study.best.dao1"/>
     </bean>
 
     <!--创建事务管理器:作用:保证service dao使用同一个连接对象-->
@@ -74,12 +74,12 @@
 
     <!--组装切面-->
     <aop:config>
-        <aop:pointcut id="pc" expression="within(com.weidd.best.service1.*Impl)"/>
+        <aop:pointcut id="pc" expression="within(java.study.best.service1.*Impl)"/>
         <aop:advisor advice-ref="interceptor" pointcut-ref="pc"/>
     </aop:config>
 
 
-    <bean id="productService" class="com.weidd.best.service1.ProductServiceImpl">
+    <bean id="productService" class="com.weidd.best.study.service1.ProductServiceImpl">
         <property name="productDao" ref="productDao"/>
     </bean>
 

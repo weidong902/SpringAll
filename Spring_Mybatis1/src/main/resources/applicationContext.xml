@@ -28,13 +28,13 @@
     <!--注入SqlSessionFactory-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com/weidd/best/mapper/*Mapper.xml"/>
-        <property name="typeAliasesPackage" value="com.weidd.best.pojo"/>
+        <property name="mapperLocations" value="classpath:com/weidd/best/study/mapper/*Mapper.xml"/>
+        <property name="typeAliasesPackage" value="java.study.best.pojo"/>
     </bean>
     <!--注入dao-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
-        <property name="basePackage" value="com.weidd.best.mapper"/>
+        <property name="basePackage" value="com.weidd.best.study.mapper"/>
     </bean>
     <!--创建事务管理器 TransactionManager-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -55,11 +55,11 @@
 
     <!--组装切面-->
     <aop:config>
-        <aop:pointcut id="pc" expression="within(com.weidd.best.service.*Impl)"/>
+        <aop:pointcut id="pc" expression="within(com.weidd.best.study.service.*Impl)"/>
         <aop:advisor advice-ref="interceptor" pointcut-ref="pc"/>
     </aop:config>
     <!--业务层-->
-    <bean id="bookService" class="com.weidd.best.service.BookServiceImpl">
-        <property name="bookDao" ref="bookDao"/>
+    <bean id="bookService" class="com.weidd.best.study.service.BookServiceImpl">
+        <property name="bookDao" ref="bookDao1"/>
     </bean>
 </beans>

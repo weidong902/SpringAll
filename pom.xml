@@ -15,6 +15,8 @@
         <module>Spring_Mybatis1</module>
         <module>Spring_Redis</module>
         <module>ssmTest</module>
+        <module>Spring_Dubbo_Provider</module>
+        <module>Spring_Dubbo_Consumer</module>
     </modules>
 
     <!--
