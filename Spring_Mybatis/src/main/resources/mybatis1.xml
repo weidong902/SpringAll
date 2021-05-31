@@ -18,7 +18,7 @@
         <!--mapper 资源文件注册,一次注册一个文件 待优化:mybatis2.xml-->
         <property name="mapperLocations">
             <array>
-                <value>classpath:com/weidd/best/dao/UserDaoMapper.xml</value>
+                <value>classpath:com/weidd/best/study/dao1/UserDaoMapper.xml</value>
             </array>
         </property>
         <!--起别名,在mapper中返回值类型或者参数类型可以用类名或类名首字母小写. 待优化:mybatis2.xml-->

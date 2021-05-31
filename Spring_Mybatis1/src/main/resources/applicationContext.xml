@@ -29,7 +29,7 @@
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:com/weidd/best/study/mapper/*Mapper.xml"/>
-        <property name="typeAliasesPackage" value="java.study.best.pojo"/>
+        <property name="typeAliasesPackage" value="com.weidd.best.study.pojo"/>
     </bean>
     <!--注入dao-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

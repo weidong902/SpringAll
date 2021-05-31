@@ -6,7 +6,7 @@
 
     <bean id="userDao" class="com.weidd.best.study.mapper.UserDao1"></bean>
 
-    <bean id="userService" class="UserService">
+    <bean id="userService" class="com.weidd.best.study.service.UserService">
         <property name="userDao" ref="userDao"></property>
         <property name="username" value="张三"></property>
         <property name="age" value="23"></property>
