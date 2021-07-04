@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--引入redis的配置文件-->
+    <context:property-placeholder location="classpath:redis.properties"/>
+
+    <!-- 1、配置连接池信息 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大连接数-->
+        <property name="maxTotal" value="${redis.maxTotal}"></property>
+        <!--<property name="maxIdle" value="${redis.maxIdle}"></property>-->
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <!-- 这里只是Spring整合Redis测试，配两个做个样子就得了-->
+
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+
+    <!--2、spring整合Jedis（Redis） 也就是配置连接工厂JedisConnectionFactory-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!--需要自定义（指定）一些工厂属性配置信息-->
+        <!--        指定服务器地址-->
+        <property name="hostName" value="${redis.host}"></property>
+        <!--        指定服务端口号-->
+        <property name="port" value="${redis.port}"></property>
+        <!--        指定密码（Redis3之前可以不指定，之后都要）-->
+        <property name="password" value="${redis.pass}"></property>
+
+        <!--   自定义连接池配置：再把第一步配置好的连接池信息通过属性注入进来  如果不自定义会采用默认的连接池配置，工厂中有属性new JedisPoolConfig-->
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+    </bean>
+
+    <!--    3、配置RedisTemplate模板   把第二步配置好的连接工厂JedisConnectionFactory通过属性注入到RedisTemplate模板中-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+
+        <!-- 如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！ -->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>-->
+        </property>
+    </bean>
+    <bean id="redisUtil" class="com.weidd.best.study.utils.RedisUtil">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+</beans>

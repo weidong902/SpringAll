@@ -1,6 +1,5 @@
 package factoryBean;
 
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,6 +10,7 @@ import java.util.Calendar;
  * @author: weidd
  * @date: 2021-04-10 15:57
  **/
+
 public class TestFactoryBean {
 
     public static void main(String[] args) {

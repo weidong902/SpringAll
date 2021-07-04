@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weidd.best.mapper.EmployeeDao">
+    <select id="findAll" resultType="Employee">
+        select * from Employee
+    </select>
+
+    <!--useGeneratedKeys="true" : 使用MySQL的自增主键  keyProperty="id" 生成的主键赋值给id-->
+    <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
+        insert into Employee values(#{id},#{name},#{brithday},#{salary})
+    </insert>
+
+
+</mapper>

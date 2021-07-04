@@ -1,13 +1,9 @@
 package com.weidd.best.study;
 
 
-import com.weidd.best.study.mapper.BookDao;
-import com.weidd.best.study.pojo.User;
-import com.weidd.best.study.service.UserService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -19,15 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestDemo extends BaseTest {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BookDao bookDao;
+//    @Autowired
+//    private UserService userService;
+//    @Autowired
+//    private BookDao bookDao;
 
     @Test
     public void test() {
-        User user = userService.queryUserByName("张三");
-        System.out.println(user);
+//        User user = userService.queryUserByName("张三");
+//        System.out.println(user);
     }
 
     @Test //不能用单元测试去做插入,否则会重复插入.

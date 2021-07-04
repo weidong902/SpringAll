@@ -17,6 +17,7 @@
         <module>ssmTest</module>
         <module>Spring_Dubbo_Provider</module>
         <module>Spring_Dubbo_Consumer</module>
+        <module>ssmbaizhi</module>
     </modules>
 
     <!--

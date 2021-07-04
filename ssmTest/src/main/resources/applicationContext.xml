@@ -71,4 +71,6 @@
         <aop:advisor advice-ref="interceptor" pointcut-ref="pc"></aop:advisor>
     </aop:config>
 
+    <import resource="spring-redis.xml"/>
+
 </beans>
