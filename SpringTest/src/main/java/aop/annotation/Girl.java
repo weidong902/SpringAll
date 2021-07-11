@@ -1,10 +1,13 @@
 package aop.annotation;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @program: SpringAll
  * @author: weidd
  * @date: 2021-06-29 14:19
  **/
+@Component
 public class Girl implements IBuy {
     @Override
     public String buy() {
