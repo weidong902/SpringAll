@@ -1,3 +1,7 @@
 out/*
 target/*
 *logs/*.log
+*.log
+.setting
+/logs/
+/Spring-rabbitMQ/

@@ -9,7 +9,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String fingName(String name) {
         System.out.println("姓名: " + name);
-        return "Provider Hello: " + name;
+        return "Provider Hello:---> " + name;
     }
 
     @Override
