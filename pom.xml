@@ -19,6 +19,7 @@
         <module>Spring_Dubbo_Consumer</module>
         <module>Spring-rabbitMQ</module>
         <module>ssmbaizhi</module>
+        <module>springsource</module>
     </modules>
 
     <!--
